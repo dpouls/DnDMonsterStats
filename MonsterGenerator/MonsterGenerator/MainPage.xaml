@@ -2,74 +2,96 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MonsterGenerator.MainPage"
-             BackgroundImageSource="dungeonwall.jpeg">
+           BackgroundColor="Tan" 
+             
+            >
+    <ScrollView>
+    <StackLayout >
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height=".75*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height=".5*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Label Text="D&amp;D MONSTER GENERATOR"
                Grid.ColumnSpan="3"
                FontSize="45"
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"
                FontAttributes="Bold"
-               TextColor="White" FontFamily="Lobster"/>
+               TextColor="Black"
+               />
         <Button x:Name="BtnGetMonster" Text="GET A MONSTER" CornerRadius="10" Grid.Row="1" Grid.ColumnSpan="3" FontSize="30" Clicked="BtnGetMonster_Clicked"/>
-        <Label x:Name="LblName" Text="Monster Name" Grid.Column="0" Grid.Row="2" TextColor="White" FontAttributes="Bold" FontSize="50" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.ColumnSpan="3"/>
-        <Label x:Name="LblSize" Text="Size: " Grid.Column="0" Grid.Row="3" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblType" Text="Type: " Grid.Column="1" Grid.Row="3" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblAC" Text="Armor Class: " Grid.Column="2" Grid.Row="3" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblHP" Text="HP: " Grid.Column="0" Grid.Row="4" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblSpeed" Text="Speed: " Grid.Column="1" Grid.Row="4" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblAlignment" Text="Alignment: " Grid.Column="2" Grid.Row="4" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblStats" Text="Monster Stats" Grid.Column="0" Grid.Row="5" TextColor="White" FontAttributes="Bold" FontSize="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" Grid.ColumnSpan="3"/>
-        <Label x:Name="LblStrength" Text="Strength: " Grid.Column="0" Grid.Row="6" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblDex" Text="Dexterity: " Grid.Column="1" Grid.Row="6" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblCon" Text="Constitution: " Grid.Column="2" Grid.Row="6" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblInt" Text="Intelligence: " Grid.Column="0" Grid.Row="7" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblWis" Text="Wisdom: " Grid.Column="1" Grid.Row="7" TextColor="White" FontAttributes="Bold" FontSize="28"  />
-        <Label x:Name="LblChar"
-               Text="Charisma: "
-               Grid.Column="2"
-               Grid.Row="7"
-               TextColor="White"
-               FontAttributes="Bold"
-               FontSize="28" />
-        <Label x:Name="LblSA"
-               Text="Special Ability: "
-               Grid.Column="0"
-               Grid.Row="8"
-               TextColor="White"
-               FontAttributes="Bold"
-               TextDecorations="Underline"
-               FontSize="28"
-               Grid.ColumnSpan="3"
-               VerticalTextAlignment="End" />
-        <Label x:Name="LblSADesc"
-                   Text="Desc: "
+            <StackLayout x:Name="SLMonsterStats">
+                
+
+
+                <Label x:Name="LblName"
+                   Text="Monster Name"
                    Grid.Column="0"
-                   Grid.Row="9"
-                   Grid.ColumnSpan="3"
-                   TextColor="White" FontAttributes="Bold" FontSize="22"/>
-        
-        
-        
-
-    </Grid>
-
+                   Grid.Row="2"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   FontSize="50"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   Grid.ColumnSpan="3" />
+            <BoxView HeightRequest="4"
+                     BackgroundColor="DarkRed"
+                     HorizontalOptions="FillAndExpand" />
+            <Label x:Name="LblSizeAlignment"
+                   Text="Size: "
+                   Grid.Column="0"
+                   Grid.Row="3"
+                   TextColor="Black"
+                   FontAttributes="Italic"
+                   FontSize="25" />
+            <BoxView HeightRequest="4"
+                     BackgroundColor="DarkRed"
+                     HorizontalOptions="FillAndExpand" />
+            <Label x:Name="LblACHPSpeed"
+                   Text="Armor Class: "
+                   TextColor="Black"
+                   FontSize="28" />
+            <BoxView HeightRequest="4"
+                     BackgroundColor="DarkRed"
+                     HorizontalOptions="FillAndExpand" />
+            <StackLayout Orientation="Horizontal"  Padding="30,10">
+                
+            <Label x:Name="LblStrength"
+                   TextColor="Black"
+                   FontSize="25" />
+            <Label x:Name="LblDex"
+                   TextColor="Black"
+                   FontSize="25" />
+            <Label x:Name="LblCon"
+                   Text="Constitution: "
+                   TextColor="Black"
+                   FontSize="25" />
+            <Label x:Name="LblInt"
+                   TextColor="Black"
+                   FontSize="25" />
+            <Label x:Name="LblWis"
+                   TextColor="Black"
+                   FontSize="25" />
+            <Label x:Name="LblChar"
+                   TextColor="Black"
+                   FontSize="25" />
+            </StackLayout>
+            <BoxView HeightRequest="4"
+                     BackgroundColor="DarkRed"
+                     HorizontalOptions="FillAndExpand" 
+                     />
+            <StackLayout x:Name="SLProficiencies"></StackLayout>
+            <BoxView HeightRequest="1"
+                     BackgroundColor="DarkRed"
+                     HorizontalOptions="FillAndExpand"
+                     x:Name="BVProf"
+                     IsVisible="False"/>
+            <StackLayout x:Name="SLSpecialAbilities"></StackLayout>
+            <Label x:Name="LblActions"  Text="ACTIONS"
+                   FontSize="30"
+                   TextColor="Black" Margin="0,10,0,0"/>
+            <BoxView HeightRequest="2"
+                     BackgroundColor="DarkRed"
+                     HorizontalOptions="FillAndExpand"
+                     />
+             </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

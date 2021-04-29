@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pH3CwiThcE8hF9KtL/mDhzbq1xGUYyrxiNyQC594oipk310uPwZNsYcZN3BGQybruP7hZDp2zg2qBNgaKsDCzg==",
+  "dgSpecHash": "fv7TN7EMvS3d7D+t20zQCjrDPhB5LHOr2WAA5dGw2Le75GxE36x8rGAqnzFenQXC+PIE1qRA3sPb0gpQs4Afdg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dalli\\source\\repos\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.Android\\MonsterGenerator.Android.csproj",
+  "projectFilePath": "C:\\Users\\dalli\\source\\repos\\MonsterGeneratorFInal\\MonsterGenerator\\MonsterGenerator.Android\\MonsterGenerator.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dalli\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\dalli\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",

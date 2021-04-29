@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dalli\\source\\repos\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj": {}
+    "C:\\Users\\dalli\\source\\repos\\MonsterGeneratorFInal\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dalli\\source\\repos\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj": {
+    "C:\\Users\\dalli\\source\\repos\\MonsterGeneratorFInal\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dalli\\source\\repos\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj",
+        "projectUniqueName": "C:\\Users\\dalli\\source\\repos\\MonsterGeneratorFInal\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj",
         "projectName": "MonsterGenerator",
-        "projectPath": "C:\\Users\\dalli\\source\\repos\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj",
+        "projectPath": "C:\\Users\\dalli\\source\\repos\\MonsterGeneratorFInal\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj",
         "packagesPath": "C:\\Users\\dalli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dalli\\source\\repos\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator\\obj\\",
+        "outputPath": "C:\\Users\\dalli\\source\\repos\\MonsterGeneratorFInal\\MonsterGenerator\\MonsterGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

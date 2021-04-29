@@ -40,11 +40,16 @@ namespace MonsterGenerator
     public class Speed
     {
         public string walk { get; set; }
+        public string fly { get; set; }
+        public string swim { get; set; }
     }
 
     public class Senses
     {
         public string darkvision { get; set; }
+        public string blindsight { get; set; }
+        public string tremorsense { get; set; }
+        public string truesight { get; set; }
         public int passive_perception { get; set; }
     }
 

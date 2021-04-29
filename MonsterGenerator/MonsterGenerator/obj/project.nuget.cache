@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kQN+RcLzVu0EORaDQd3AQ//VJOfHKKPqDzQ//6N1Hm7mlCAu3p5bBa71SVtElXaWxq2RO7ZuSauYOhHdwiVQcg==",
+  "dgSpecHash": "c9BhOMaDOOcjab4xJvCm7/PxzMHNvivNO+Imn69P+pSTGTwgWjhydNTXEmUDG/KYWRjnn+jWb6AaeNmAIboH2A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dalli\\source\\repos\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj",
+  "projectFilePath": "C:\\Users\\dalli\\source\\repos\\MonsterGeneratorFInal\\MonsterGenerator\\MonsterGenerator\\MonsterGenerator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dalli\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\dalli\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",

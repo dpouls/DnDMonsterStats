@@ -12,3 +12,17 @@ C:\Users\dalli\source\repos\MonsterGenerator\MonsterGenerator\MonsterGenerator\o
 C:\Users\dalli\source\repos\MonsterGenerator\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MonsterGenerator.dll
 C:\Users\dalli\source\repos\MonsterGenerator\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\ref\MonsterGenerator.dll
 C:\Users\dalli\source\repos\MonsterGenerator\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MonsterGenerator.pdb
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MonsterGenerator.AssemblyInfoInputs.cache
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MonsterGenerator.AssemblyInfo.cs
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MonsterGenerator.csproj.CoreCompileInputs.cache
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\bin\Debug\netstandard2.0\MonsterGenerator.deps.json
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\bin\Debug\netstandard2.0\MonsterGenerator.dll
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\bin\Debug\netstandard2.0\ref\MonsterGenerator.dll
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\bin\Debug\netstandard2.0\MonsterGenerator.pdb
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MonsterGenerator.dll
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\ref\MonsterGenerator.dll
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MonsterGenerator.pdb
+C:\Users\dalli\source\repos\MonsterGeneratorFInal\MonsterGenerator\MonsterGenerator\obj\Debug\netstandard2.0\MonsterGenerator.csprojAssemblyReference.cache
