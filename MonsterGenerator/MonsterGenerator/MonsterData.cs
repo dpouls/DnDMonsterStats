@@ -34,6 +34,7 @@ namespace MonsterGenerator
         public int xp { get; set; }
         public Special_Abilities[] special_abilities { get; set; }
         public Action[] actions { get; set; }
+        public Legendary_Actions[] legendary_actions { get; set; }
         public string url { get; set; }
     }
 
@@ -92,5 +93,32 @@ namespace MonsterGenerator
         public string name { get; set; }
         public string url { get; set; }
     }
+
+  
+    
+
+    public class Legendary_Actions
+    {
+        public string name { get; set; }
+        public string desc { get; set; }
+        public Dc dc { get; set; }
+        public Damage[] damage { get; set; }
+    }
+
+    public class Dc
+    {
+        public Dc_Type dc_type { get; set; }
+        public int dc_value { get; set; }
+        public string success_type { get; set; }
+    }
+
+    public class Dc_Type
+    {
+        public string index { get; set; }
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+
 
 }

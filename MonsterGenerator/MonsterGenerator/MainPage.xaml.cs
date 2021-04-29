@@ -39,7 +39,7 @@ namespace MonsterGenerator
                 string monsterList = wc.DownloadString($"https://www.dnd5eapi.co/api/monsters/");
                     JObject parsedMonsterList = JObject.Parse(monsterList);
                 string jsonData = wc.DownloadString($"https://www.dnd5eapi.co/api/monsters/{parsedMonsterList["results"][rand.Next(0,331)]["index"]}/");
-               // string jsonData = wc.DownloadString($"https://www.dnd5eapi.co/api/monsters/green-hag/");
+                
                 try
                 {
                     //deserialize JSON
@@ -48,11 +48,13 @@ namespace MonsterGenerator
                     SetGenericStats(monsterData);
                     SetACHPSpeed(monsterData);
                     SetStats(monsterData);
-                    StatVisability(true) ;
                     SetSpecialAbilities(monsterData);
                     SetProficiencies(monsterData);
                     SetImmunitiesSenses(monsterData);
                     SetLanguagesCR(monsterData);
+                    SetActions(monsterData);
+                    SetLegendaryActions(monsterData);
+                    StatVisability(true) ;
                     
                 } 
                 catch (Exception ex)
@@ -62,9 +64,46 @@ namespace MonsterGenerator
             }
         }
 
+        private void SetLegendaryActions(MonsterData monsterData)
+        {
+            SLLegActions.Children.Clear();
+            if (monsterData.legendary_actions != null)
+            {
+                LblLegendaryActions.IsVisible = true;
+            for (int i = 0; i < monsterData.legendary_actions.Length; i++)
+            {
+                var fs = new FormattedString();
+                fs.Spans.Add(new Span { Text = $"{monsterData.legendary_actions[i].name}. ", FontSize = 25, FontAttributes = FontAttributes.Bold | FontAttributes.Italic, TextColor = Xamarin.Forms.Color.Black });
+
+                fs.Spans.Add(new Span { Text = $"{monsterData.legendary_actions[i].desc}. ", FontSize = 24, TextColor = Xamarin.Forms.Color.Black });
+
+                var LblLegActions = new Label();
+                LblLegActions.FormattedText = fs;
+                SLLegActions.Children.Add(LblLegActions); ;
+            }
+            }
+            
+        }
+
+        private void SetActions(MonsterData monsterData)
+        {
+            SLActions.Children.Clear();
+            for (int i = 0; i < monsterData.actions.Length; i++)
+            {
+                var fs = new FormattedString();
+                fs.Spans.Add(new Span { Text = $"{monsterData.actions[i].name}. " , FontSize = 25, FontAttributes = FontAttributes.Bold | FontAttributes.Italic,  TextColor = Xamarin.Forms.Color.Black });
+
+                fs.Spans.Add(new Span { Text = $"{monsterData.actions[i].desc}. ", FontSize = 24, TextColor = Xamarin.Forms.Color.Black });
+                
+                var LblActions = new Label();
+                LblActions.FormattedText = fs;
+                SLActions.Children.Add(LblActions);;
+            }
+        }
+
         private void SetLanguagesCR(MonsterData monsterData)
         {
-            string languages = "";
+            
             if (monsterData.languages.Length > 0)
             {               
                 SLProficiencies.Children.Add(new Label { Text = $"Languages: {monsterData.languages}", FontSize = 25, TextColor = Xamarin.Forms.Color.Black });
@@ -204,12 +243,12 @@ namespace MonsterGenerator
             int wisMod = (int)Math.Floor(((decimal)monsterData.wisdom - 10) / 2);
             int charMod = (int)Math.Floor(((decimal)monsterData.charisma - 10) / 2);
             //determine if its positive or negative and add a plus (+) sign in front if it's positive. The minus (-) sign automatically is placed.
-            string sMod = (strMod / 2 > 0) ? $"+{strMod}" : strMod.ToString();
-            string dMod = (dexMod / 2 > 0) ? $"+{dexMod}" : dexMod.ToString();
-            string cMod = (conMod / 2 > 0) ? $"+{conMod}" : conMod.ToString();
-            string iMod = (intMod / 2 > 0) ? $"+{intMod}" : intMod.ToString();
-            string wMod = (wisMod / 2 > 0) ? $"+{wisMod}" : wisMod.ToString();
-            string chMod = (charMod / 2 > 0) ? $"+{charMod}" : charMod.ToString();
+            string sMod = (strMod > 0) ? $"+{strMod}" : strMod.ToString();
+            string dMod = (dexMod > 0) ? $"+{dexMod}" : dexMod.ToString();
+            string cMod = (conMod > 0) ? $"+{conMod}" : conMod.ToString();
+            string iMod = (intMod > 0) ? $"+{intMod}" : intMod.ToString();
+            string wMod = (wisMod > 0) ? $"+{wisMod}" : wisMod.ToString();
+            string chMod = (charMod > 0) ? $"+{charMod}" : charMod.ToString();
             //assign each stat its score and modifier.
             LblStrength.Text = $"  STR    \n{monsterData.strength.ToString()} ({sMod})";
             LblDex.Text = $"  DEX    \n{monsterData.dexterity.ToString()} ({dMod})";
