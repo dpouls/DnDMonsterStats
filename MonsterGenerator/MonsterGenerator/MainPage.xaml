@@ -16,7 +16,15 @@
                FontAttributes="Bold"
                TextColor="Black"
                />
-        <Button x:Name="BtnGetMonster" Text="GET A MONSTER" CornerRadius="10" Grid.Row="1" Grid.ColumnSpan="3" FontSize="30" Clicked="BtnGetMonster_Clicked"/>
+            <Button x:Name="BtnPickMonster"
+                    Text="PICK A MONSTER"
+                    CornerRadius="10"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="3"
+                    FontSize="30"
+                    Clicked="BtnPickMonster_Clicked" />
+
+            <Button x:Name="BtnGetMonster" Text="GET A RANDOM MONSTER" CornerRadius="10" Grid.Row="1" Grid.ColumnSpan="3" FontSize="30" Clicked="BtnGetMonster_Clicked"/>
             <StackLayout x:Name="SLMonsterStats">
                 <Label x:Name="LblName"
                    Text="Monster Name"
@@ -80,7 +88,9 @@
                      HorizontalOptions="FillAndExpand"
                      x:Name="BVProf"
                      IsVisible="False"/>
-            <StackLayout x:Name="SLSpecialAbilities"></StackLayout>
+                <Button x:Name="BtnLoadMore" Text="LOAD ABILITIES AND ACTIONS" TextColor="Black" FontSize="30" Clicked="BtnLoadMore_Clicked"/>
+                <StackLayout>
+                    <StackLayout x:Name="SLSpecialAbilities"></StackLayout>
             <Label x:Name="LblActions"  Text="ACTIONS"
                    FontSize="30"
                    TextColor="Black" Margin="0,10,0,0"/>
@@ -99,6 +109,8 @@
                          HorizontalOptions="FillAndExpand" />
                 <StackLayout x:Name="SLLegActions"
                              ></StackLayout>
+                </StackLayout>
+                
              </StackLayout>
         </StackLayout>
     </ScrollView>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonsterGenerator.PickMonster"
+             Background="DarkRed">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="SELECT YOUR BEAST!"
+ 
+                   FontSize="50"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+            <BoxView HeightRequest="4"
+                     BackgroundColor="Tan"
+                     HorizontalOptions="FillAndExpand"/>
+            <Picker x:Name="PckerMonsters" FontSize="40" BackgroundColor="DarkSlateGray" TextColor="White">
+                <Picker.Items></Picker.Items>
+            </Picker>
+            <Button x:Name="BtnSelectMonster" Text="SELECT THIS MONSTER" FontAttributes="Bold" TextColor="Black" BackgroundColor="Tan" Clicked="BtnSelectMonster_Clicked"/>
+            <Button x:Name="BtnClose"
+                    Text="CLOSE"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    BackgroundColor="Tan"
+                    Clicked="BtnClose_Clicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

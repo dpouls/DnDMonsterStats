@@ -14,6 +14,7 @@ namespace MonsterGenerator
     public partial class MainPage : ContentPage
     {
         Random rand = new Random();
+        MonsterData monsterData = new MonsterData();
         
         public MainPage()
         {
@@ -21,39 +22,61 @@ namespace MonsterGenerator
             StatVisability(false);
         }
         /// <summary>
-        /// we make the call to the API /monsters/ endpoint to get a list of monsters. From there we can get the index of each monster so we make a second API call to /monsters/{index of monster, they're strings not numbers'} using a random index from the array in the first api call.
+        /// NEW: This is for when I close the modal, it refreshes the mainpage and to display which monster was selected.
+        /// </summary>
+        protected override void  OnAppearing()
+        {
+            CheckSelectedStatus();
+
+        }
+        /// <summary>
+        /// NEW: Checks the SelectedMonster class to see if the user picked a specific monster on the modal, if so, we will display its results by calling GetSelectedMonster.
+        /// </summary>
+        private void CheckSelectedStatus()
+        {
+            if (SelectedMonster.SelectedMonsterIndex != null)
+            {
+                GetSelectedMonster(SelectedMonster.SelectedMonsterIndex);
+            }
+        }
+
+        /// <summary>
+        /// OLD: Makes an API call to get the list of monsters, then uses that array to get a random monster and make a second api call with its index.
+        /// NEW:
+        /// Seperated all the stats into different methods. 
+        /// Changed the display of the first few stats.
+        /// Added lots of functionality to display the varying content of each monster. (Speeds/actions/abilities/legendary actions/ability modifiers ---see comments on each method)
+        /// Created a new method to hide all data before it arrives. 
         /// 
-        /// From there we change all the label's texts to display the monster's information. 
-        /// We check to make sure there is a walking speed and special abilities before displaying information. 
-        /// We make all the labels visible. 
-        /// 
-        /// It appears the catch method fires if you click the button again too quickly. I'm not sure what's going on there. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnGetMonster_Clicked(object sender, EventArgs e)
+        ///
+        private  void BtnGetMonster_Clicked(object sender, EventArgs e)
         {
+            SLActions.Children.Clear();
+            SLLegActions.Children.Clear();
+            SLSpecialAbilities.Children.Clear();
+            BtnLoadMore.Text = "LOAD ABILITIES AND ACTIONS";
+            
             using (WebClient wc = new WebClient())
             {
                 
-                string monsterList = wc.DownloadString($"https://www.dnd5eapi.co/api/monsters/");
+                string monsterList =  wc.DownloadString($"https://www.dnd5eapi.co/api/monsters/");
                     JObject parsedMonsterList = JObject.Parse(monsterList);
                 string jsonData = wc.DownloadString($"https://www.dnd5eapi.co/api/monsters/{parsedMonsterList["results"][rand.Next(0,331)]["index"]}/");
                 
                 try
                 {
                     //deserialize JSON
-                    MonsterData monsterData = JsonConvert.DeserializeObject<MonsterData>(jsonData);
-                                       
+                    monsterData =  JsonConvert.DeserializeObject<MonsterData>(jsonData);
+                    LblActions.IsVisible = false;
                     SetGenericStats(monsterData);
                     SetACHPSpeed(monsterData);
                     SetStats(monsterData);
-                    SetSpecialAbilities(monsterData);
                     SetProficiencies(monsterData);
                     SetImmunitiesSenses(monsterData);
                     SetLanguagesCR(monsterData);
-                    SetActions(monsterData);
-                    SetLegendaryActions(monsterData);
                     StatVisability(true) ;
                     
                 } 
@@ -63,7 +86,12 @@ namespace MonsterGenerator
                 }
             }
         }
-
+        /// <summary>
+        /// NEW: Dynamically generates the legendary actions from the array (if there is one.)
+        /// Hides the label/stack layout if there is no array sent.
+        /// Uses FormattedString() to bold part of the line. 
+        /// </summary>
+        /// <param name="monsterData"></param>
         private void SetLegendaryActions(MonsterData monsterData)
         {
             SLLegActions.Children.Clear();
@@ -82,12 +110,21 @@ namespace MonsterGenerator
                 SLLegActions.Children.Add(LblLegActions); ;
             }
             }
+            LblLegendaryActions.IsVisible = false;
             
         }
-
+        /// <summary>
+        /// NEW: Dynamically generates the actions from the array (if there is one.)
+        /// Hides the label/stack layout if there is no array sent.
+        /// Uses FormattedString() to bold part of the line. 
+        /// </summary>
+        /// <param name="monsterData"></param>
         private void SetActions(MonsterData monsterData)
         {
             SLActions.Children.Clear();
+            if (monsterData.actions != null)
+            {
+
             for (int i = 0; i < monsterData.actions.Length; i++)
             {
                 var fs = new FormattedString();
@@ -99,8 +136,18 @@ namespace MonsterGenerator
                 LblActions.FormattedText = fs;
                 SLActions.Children.Add(LblActions);;
             }
+            }
+            else
+            {
+                LblActions.IsVisible = false;
+                SLActions.IsVisible = false;
+            }
         }
-
+        /// <summary>
+        /// NEW: If the monster speaks languages, assign the string a label.
+        /// If it has a challenge rating, add it to a new label and concatenate the xp. 
+        /// </summary>
+        /// <param name="monsterData"></param>
         private void SetLanguagesCR(MonsterData monsterData)
         {
             
@@ -114,7 +161,13 @@ namespace MonsterGenerator
             }
 
         }
-
+        /// <summary>
+        /// NEW: 
+        /// Creates a string that shows the damage imunities seperated by commas. Was hard because of the formatting of the strings in the JSON.
+        /// Sees if the monster has one or more of the four extra senses and concatenates them into a string. 
+        /// Both remove the last comma from the string.
+        /// </summary>
+        /// <param name="monsterData"></param>
         private void SetImmunitiesSenses(MonsterData monsterData)
         {
             string damageImmunities = "";
@@ -151,8 +204,10 @@ namespace MonsterGenerator
 
 
         /// <summary>
-        /// Goes through the proficiencies array in the JSON and sees what kinds of saving throws and skills are there and adds them to a string.
+        /// NEW: Goes through the proficiencies array in the JSON and sees what kinds of saving throws and skills are there and adds them to a string.
         /// I'm proud of this one!
+        /// The JSON was annoyingly formatted and I had to remove parts of the strings for displaying. There are a ton of skills (20 ish) and proficiencies (20 ish)so I tried to find a way to display what the monster has without having to write an if statement for every single skill/proficiency. 
+        /// 
         /// </summary>
         /// <param name="monsterData"></param>
         private void SetProficiencies(MonsterData monsterData)
@@ -182,6 +237,7 @@ namespace MonsterGenerator
                 }   
             } else
             {
+                //removes red line
                 BVProf.IsVisible = false;
             }
 
@@ -205,19 +261,31 @@ namespace MonsterGenerator
             }
             
         }
-
+        /// <summary>
+        /// NEW:
+        /// These stats were in the old project but I have redone them so they look better and take up less space (both on the app and in the code )
+        /// </summary>
+        /// <param name="monsterData"></param>
         private void SetGenericStats(MonsterData monsterData)
         {
             LblName.Text = $"{monsterData.name}";
             LblSizeAlignment.Text = $"{monsterData.size.ToString()} {monsterData.type}, {monsterData.alignment}";
             LblACHPSpeed.Text = $"Armor Class: {monsterData.armor_class.ToString()} \n HP: \n {monsterData.hit_points.ToString()} ({monsterData.hit_dice}) \n";
-        }
 
+        }
+        /// <summary>
+        /// NEW: Sets the visibility, it used to list all the labels individually, probably didn't need a method for this but it works. 
+        /// </summary>
+        /// <param name="tf"></param>
         private void StatVisability(bool tf)
         {
             SLMonsterStats.IsVisible = tf;       
         }
-
+        /// <summary>
+        /// NEW: 
+        /// Thanks to your help, I figured out how to loop through the special abilities array (if there was one) and display all of them.
+        /// </summary>
+        /// <param name="monsterData"></param>
         private void SetSpecialAbilities(MonsterData monsterData)
         {
             SLSpecialAbilities.Children.Clear();
@@ -232,7 +300,11 @@ namespace MonsterGenerator
             
           
         }
-
+        /// <summary>
+        /// OLD: Only had the original 6 stats that come in the JSON.
+        /// NEW: Added modifiers. The JSON didn't have the modifiers so i took the ability score minus 10 then divide by two (rounded down) for an ability modifier on dice rolls. 
+        /// </summary>
+        /// <param name="monsterData"></param>
         private void SetStats(MonsterData monsterData)
         {
             //Find dice roll modifier based on the monsters stat in each category. 
@@ -258,7 +330,12 @@ namespace MonsterGenerator
             LblChar.Text = $"  CHAR    \n{monsterData.charisma.ToString()} ({chMod})";
 
         } 
-
+        /// <summary>
+        /// OLD: Armor class, walking speed only
+        /// NEW: 
+        /// Checks to see what kinds of speed the monster has and displays all of them. 
+        /// </summary>
+        /// <param name="monsterData"></param>
         private void SetACHPSpeed(MonsterData monsterData)
         {
             if (monsterData.speed.walk != null)
@@ -284,6 +361,67 @@ namespace MonsterGenerator
             {
                 LblACHPSpeed.Text = $"Speed: No Data";
             }
+        }
+        /// <summary>
+        /// NEW:
+        /// opens a modal to pick the monster. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnPickMonster_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new PickMonster());
+        }
+        /// <summary>
+        /// NEW:
+        /// This is for after the user picks a monster from the picker on the modal. It does almost the same thing as the  random BtnGetMonster_Clicked(). I'm thinking of rewriting the code to be able to handle both.
+        /// </summary>
+        /// <param name="index"></param>
+        public void GetSelectedMonster(string index)
+        {
+            LblActions.IsVisible = false;
+            SLActions.Children.Clear();
+            SLLegActions.Children.Clear();
+            SLSpecialAbilities.Children.Clear();
+            BtnLoadMore.Text = "LOAD ABILITIES AND ACTIONS";
+            using (WebClient wc = new WebClient())
+            {
+                
+                string jsonData = wc.DownloadString($"https://www.dnd5eapi.co/api/monsters/{index}/");
+
+                try
+                {
+                    //deserialize JSON
+                   monsterData = JsonConvert.DeserializeObject<MonsterData>(jsonData);
+
+                    SetGenericStats(monsterData);
+                    SetACHPSpeed(monsterData);
+                    SetStats(monsterData);
+                    
+                    SetProficiencies(monsterData);
+                    SetImmunitiesSenses(monsterData);
+                    SetLanguagesCR(monsterData);
+
+                    StatVisability(true);
+
+                }
+                catch (Exception ex)
+                {
+                    DisplayAlert("Oh no!", $"Some goblins must have sabotaged the server! \n ({ex.Message})", "Close");
+                }
+            }
+        }
+        /// <summary>
+        /// NEW: this is a result of me trying to figure out why the text wont load off the screen. If you click it twice it works. I think it's way above my head and i've worked on it for hours and google isn't helping so far. I tried to look up async await but couldnt get that to work either. So here's my hack job attempt so you at least can see all the data I've worked hard to display!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnLoadMore_Clicked(object sender, EventArgs e)
+        {
+            SetSpecialAbilities(monsterData);
+            SetActions(monsterData);
+            SetLegendaryActions(monsterData);
+            BtnLoadMore.Text = "DIDN'T LOAD? CLICK AGAIN :(";
         }
     }
 }
